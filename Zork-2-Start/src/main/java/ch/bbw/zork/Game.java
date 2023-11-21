@@ -94,8 +94,11 @@ public class Game {
 				System.out.println("Well you are rich now. You won the game.");
 				return true;
 			}
-
-		} else if (commandWord.equals("map")) {
+		}
+		else if(commandWord.equals("back")) {
+			goBack();
+		}
+		else if (commandWord.equals("map")) {
 			showMap();
 		} else if (commandWord.equals("quit")) {
 			if (command.hasSecondWord())
@@ -124,14 +127,10 @@ public class Game {
 			System.out.println("Go where?");
 		} else {
 			String direction = command.getSecondWord();
-			if (direction.equals("back")) {
-				nextRoom = goBack();
-			}
-			else {
-				lastRooms.add(currentRoom);
-				// Try to leave current room.
-				nextRoom = currentRoom.nextRoom(direction);
-			}
+
+			lastRooms.add(currentRoom);
+			// Try to leave current room.
+			nextRoom = currentRoom.nextRoom(direction);
 
 			if (nextRoom == null)
 				System.out.println("There is no door!");
@@ -141,15 +140,14 @@ public class Game {
 			}
 		}
 	}
-	private Room goBack() {
+	private void goBack() {
 		if (lastRooms.isEmpty()) {
 			System.out.println("You never went anywhere!");
 		}
 		else {
-			Room room = lastRooms.get(lastRooms.size() - 1);
-			lastRooms.remove(room);
-			return room;
+			currentRoom = lastRooms.get(lastRooms.size() - 1);
+			lastRooms.remove(currentRoom);
+			System.out.println(currentRoom.longDescription());
 		}
-		return null;
 	}
 }
