@@ -22,11 +22,13 @@ public class Game {
 		secretLaboratory = new Room("Secret Laboratory");
 		treasureRoom = new Room("Treasure room");
 		allRooms = new ArrayList<>();
-		allRooms.add(outside);
-		allRooms.add(lab);
-		allRooms.add(tavern);
-		allRooms.add(gblock);
-		allRooms.add(office);
+		allRooms.add(entranceHall);
+		allRooms.add(entranceHall);
+		allRooms.add(throneRoom);
+		allRooms.add(library);
+		allRooms.add(storageRoom);
+		allRooms.add(secretLaboratory);
+		allRooms.add(treasureRoom);
 
 		entranceHall.put(null, throneRoom, null, null);
 		throneRoom.put(null, secretLaboratory, library, null);
