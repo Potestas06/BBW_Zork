@@ -22,11 +22,12 @@ public class Game {
 		secretLaboratory = new Room("Secret Laboratory");
 		treasureRoom = new Room("Treasure room");
 		allRooms = new ArrayList<>();
-		allRooms.add(outside);
-		allRooms.add(lab);
-		allRooms.add(tavern);
-		allRooms.add(gblock);
-		allRooms.add(office);
+		allRooms.add(entranceHall);
+		allRooms.add(throneRoom);
+		allRooms.add(library);
+		allRooms.add(storageRoom);
+		allRooms.add(secretLaboratory);
+		allRooms.add(treasureRoom);
 
 		entranceHall.put(null, throneRoom, null, null);
 		throneRoom.put(null, secretLaboratory, library, null);
@@ -48,10 +49,6 @@ public class Game {
 		while (!finished) {
 			Command command = parser.get(); // reads a command
 			finished = processCommand(command);
-
-			if (currentRoom == treasureRoom) {
-				finished = true;
-			}
 		}
 		System.out.println("Thank you for playing. Good bye.");
 	}
@@ -90,12 +87,12 @@ public class Game {
 
 			// Gewonnen?
 			// Hier ein Beispielcode für "gewonnen", der Code prüft Objektreferenzen
-			/*
-			 * if (currentRoom == tavern) {
-			 * System.out.println("Sie sind in der Taverne und haben gewonnen!");
-			 * return true;
-			 * }
-			 */
+
+			  if (currentRoom == treasureRoom) {
+			  System.out.println("Well you are rich now. You won the game.");
+			  return true;
+			  }
+
 		} else if (commandWord.equals("map")) {
 			showMap();
 		} else if (commandWord.equals("quit")) {
