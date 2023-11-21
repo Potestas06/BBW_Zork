@@ -7,6 +7,8 @@ import java.util.Stack;
 public class Game {
 
 	private Parser parser;
+
+	private ArrayList<Room> lastRooms = new ArrayList<>();
 	private Room currentRoom;
 	private Room entranceHall, throneRoom, library, storageRoom, secretLaboratory, treasureRoom;
 	private ArrayList<Room> allRooms;
@@ -121,14 +123,20 @@ public class Game {
 	}
 
 	private void goRoom(Command command) {
+		Room nextRoom;
 		// if there is no second word, we don't know where to go...
 		if (!command.hasSecondWord()) {
 			System.out.println("Go where?");
 		} else {
 			String direction = command.getSecondWord();
-
-			// Try to leave current room.
-			Room nextRoom = currentRoom.nextRoom(direction);
+			if (direction.equals("back")) {
+				nextRoom = goBack();
+			}
+			else {
+				lastRooms.add(currentRoom);
+				// Try to leave current room.
+				nextRoom = currentRoom.nextRoom(direction);
+			}
 
 			if (nextRoom == null)
 				System.out.println("There is no door!");
@@ -137,5 +145,16 @@ public class Game {
 				System.out.println(currentRoom.longDescription());
 			}
 		}
+	}
+	private Room goBack() {
+		if (lastRooms.isEmpty()) {
+			System.out.println("You never went anywhere!");
+		}
+		else {
+			Room room = lastRooms.get(lastRooms.size() - 1);
+			lastRooms.remove(room);
+			return room;
+		}
+		return null;
 	}
 }
