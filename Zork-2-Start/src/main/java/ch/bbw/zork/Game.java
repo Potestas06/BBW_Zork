@@ -88,10 +88,10 @@ public class Game {
 			// Gewonnen?
 			// Hier ein Beispielcode für "gewonnen", der Code prüft Objektreferenzen
 
-			  if (currentRoom == treasureRoom) {
-			  System.out.println("Well you are rich now. You won the game.");
-			  return true;
-			  }
+			if (currentRoom == treasureRoom) {
+				System.out.println("Well you are rich now. You won the game.");
+				return true;
+			}
 
 		} else if (commandWord.equals("map")) {
 			showMap();
