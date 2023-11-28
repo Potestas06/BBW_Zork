@@ -2,6 +2,7 @@ package ch.bbw.zork;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class Game {
@@ -13,9 +14,15 @@ public class Game {
 	private Room entranceHall, throneRoom, library, storageRoom, secretLaboratory, treasureRoom;
 	private ArrayList<Room> allRooms;
 
+	private Player player;
+
 	public Game() {
 
 		parser = new Parser(System.in);
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Please enter your name: ");
+		String name = scanner.nextLine();
+		player = new Player(name);
 
 		entranceHall = new Room("Entrance hall");
 		throneRoom = new Room("Throne Room");
@@ -23,6 +30,7 @@ public class Game {
 		storageRoom = new Room("Storage Room");
 		secretLaboratory = new Room("Secret Laboratory");
 		treasureRoom = new Room("Treasure room");
+		storageRoom.addItem(new Item("Bread", 10));
 		allRooms = new ArrayList<>();
 		allRooms.add(entranceHall);
 		allRooms.add(throneRoom);
@@ -57,7 +65,7 @@ public class Game {
 
 	private void printWelcome() {
 		System.out.println();
-		System.out.println("Welcome to Zork!");
+		System.out.println("Welcome to Zork! " + player.getName());
 		System.out.println("Zork is a simple adventure game.");
 		System.out.println("Type 'help' if you need help.");
 		System.out.println();
@@ -100,6 +108,49 @@ public class Game {
 		}
 		else if (commandWord.equals("map")) {
 			showMap();
+		} else if (commandWord.equals("take")) {
+			if (command.hasSecondWord()) {
+				String itemDescription = command.getSecondWord();
+				Item item = currentRoom.getItem(itemDescription);
+				if (item != null) {
+					if(player.getCurrentWeight() + item.getWeight() <= player.getMaxWeight()){
+						player.addInventory(item);
+						System.out.println("You took the " + itemDescription);
+						currentRoom.removeItem(itemDescription);
+					}
+					else{
+						System.out.println("You can't carry that much!");
+					}
+				} else {
+					System.out.println("There is no " + itemDescription + " in this room.");
+				}
+			} else {
+				System.out.println("Take what?");
+			}
+		} else if (commandWord.equals("drop")) {
+			if (command.hasSecondWord()) {
+				String itemDescription = command.getSecondWord();
+				Item item = currentRoom.getItem(itemDescription);
+				if (item != null) {
+					currentRoom.addItem(item);
+					player.removeInventory(item);
+					System.out.println("You dropped the " + itemDescription);
+				} else {
+					System.out.println("You don't have a " + itemDescription + " in your inventory.");
+				}
+			} else {
+				System.out.println("Drop what?");
+			}
+		} else if (commandWord.equals("inventory")) {
+			System.out.println("You have the following items in your inventory:");
+			for (Item item : player.getInventory()) {
+				if (item != null) {
+					System.out.println("- " + item.getDescription());
+				}
+			}
+			System.out.println("You are carrying " + player.getCurrentWeight() + "kg out of " + player.getMaxWeight() + "kg.");
+
+
 		} else if (commandWord.equals("quit")) {
 			if (command.hasSecondWord())
 				System.out.println("Quit what?");
