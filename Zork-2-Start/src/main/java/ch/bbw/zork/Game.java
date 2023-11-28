@@ -76,9 +76,18 @@ public class Game {
 		for (Room room : allRooms) {
 			System.out.println("*****************************************");
 			if (room == currentRoom) {
+				System.out.println("*****************************************");
 				System.out.println("--You are currently in this room.--");
+				System.out.println(room.shortDescription());
+				System.out.println("Items in this room:");
+				System.out.println(room.getItemsString());
+				System.out.println("*****************************************");
+
+			}else {
+				System.out.println(room.shortDescription());
+				System.out.println("Items in this room:");
+				System.out.println(room.getItemsString());
 			}
-			System.out.println(room.longDescription());
 		}
 		System.out.println("*****************************************");
 	}
