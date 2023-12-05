@@ -24,4 +24,7 @@ A Project for school
 - Game
 - MainApplication
 
+## Fazit
+
+Das Arbeiten am Zork 2 – Game Projekt mit meinem Partner war echt eine coole Erfahrung. Wir hatten unsere Höhen und Tiefen, besonders wenn es ums Programmieren ging, aber am Ende haben wir viel gelernt. Es war nicht nur ums Coden, sondern auch darum, wie man im Team zusammenarbeitet. Wir mussten viel planen und kommunizieren, um alles hinzukriegen. Manchmal war es knifflig, aber ich bin stolz darauf, was wir zusammen geschafft haben. Dieses Projekt hat mir gezeigt, dass man mit Geduld und Teamarbeit echt was Cooles erschaffen kann.
 
