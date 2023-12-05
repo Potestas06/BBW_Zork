@@ -30,7 +30,7 @@ public class Game {
 		storageRoom = new Room("Storage Room");
 		secretLaboratory = new Room("Secret Laboratory");
 		treasureRoom = new Room("Treasure room");
-		storageRoom.addItem(new Item("Bread", 10));
+		storageRoom.addItem(new Item("Bread", 50));
 		allRooms = new ArrayList<>();
 		allRooms.add(entranceHall);
 		allRooms.add(throneRoom);
@@ -108,7 +108,7 @@ public class Game {
 			// Hier ein Beispielcode für "gewonnen", der Code prüft Objektreferenzen
 
 			if (currentRoom == treasureRoom) {
-				System.out.println("Well you are rich now. You won the game.");
+				System.out.println("Well "+ player.getName() +" ......  you are rich now. You won the game.");
 				return true;
 			}
 		}
